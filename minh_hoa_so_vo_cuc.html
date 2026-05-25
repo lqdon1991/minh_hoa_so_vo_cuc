@@ -3,190 +3,235 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Minh hoạ 1/n tiến gần về 0</title>
+  <title>1/n tiến gần về 0</title>
 
   <style>
     body{
-      font-family: Arial, sans-serif;
-      background:#f4f7fb;
+      margin:0;
       padding:40px;
-      color:#333;
-      line-height:1.7;
+      font-family:Arial, sans-serif;
+      background:linear-gradient(to bottom,#eff6ff,#ffffff);
+      color:#1e293b;
+    }
+
+    .container{
+      max-width:1000px;
+      margin:auto;
+      background:white;
+      border-radius:24px;
+      padding:40px;
+      box-shadow:0 20px 50px rgba(0,0,0,0.08);
     }
 
     h1{
       text-align:center;
-      color:#1e3a8a;
+      font-size:42px;
+      margin-bottom:10px;
+      color:#1d4ed8;
     }
 
-    .container{
-      max-width:900px;
-      margin:auto;
-      background:white;
-      padding:40px;
-      border-radius:20px;
-      box-shadow:0 10px 30px rgba(0,0,0,0.1);
+    .subtitle{
+      text-align:center;
+      font-size:20px;
+      margin-bottom:50px;
+      color:#475569;
     }
 
-    .example{
-      margin-top:40px;
+    .number-line-wrapper{
+      margin-top:60px;
     }
 
-    .fraction{
-      font-size:28px;
+    .labels{
+      display:flex;
+      justify-content:space-between;
       font-weight:bold;
-      margin-bottom:15px;
-      color:#2563eb;
+      margin-top:10px;
+      font-size:22px;
     }
 
     .line{
       position:relative;
-      height:12px;
-      background:#dbeafe;
-      border-radius:10px;
-      margin:30px 0;
+      height:16px;
+      background:#cbd5e1;
+      border-radius:20px;
+      overflow:visible;
     }
 
     .point{
       position:absolute;
-      top:-10px;
-      width:30px;
-      height:30px;
-      background:#ef4444;
+      top:-18px;
+      width:50px;
+      height:50px;
       border-radius:50%;
-      transform:translateX(-50%);
+      background:#ef4444;
+      color:white;
       display:flex;
       align-items:center;
       justify-content:center;
-      color:white;
-      font-size:12px;
       font-weight:bold;
+      transform:translateX(-50%);
+      box-shadow:0 10px 20px rgba(239,68,68,0.4);
+      transition:left 1.2s ease;
     }
 
-    .label{
-      display:flex;
-      justify-content:space-between;
-      font-weight:bold;
-    }
-
-    .explain{
-      background:#f8fafc;
-      padding:15px;
-      border-left:5px solid #3b82f6;
-      border-radius:10px;
-    }
-
-    .big{
-      text-align:center;
-      font-size:32px;
+    .info{
       margin-top:50px;
+      text-align:center;
+      font-size:28px;
+      line-height:1.8;
+    }
+
+    .fraction{
+      color:#2563eb;
+      font-weight:bold;
+      font-size:42px;
+    }
+
+    .value{
       color:#dc2626;
       font-weight:bold;
     }
 
-    .arrow{
+    .controls{
+      margin-top:50px;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    button{
+      border:none;
+      padding:15px 28px;
+      border-radius:14px;
+      background:#2563eb;
+      color:white;
+      font-size:18px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    button:hover{
+      transform:translateY(-2px);
+      background:#1d4ed8;
+    }
+
+    .formula{
       text-align:center;
+      margin-top:70px;
       font-size:50px;
-      color:#2563eb;
+      font-weight:bold;
+      color:#dc2626;
+    }
+
+    .desc{
+      margin-top:30px;
+      background:#f8fafc;
+      border-left:6px solid #3b82f6;
+      padding:25px;
+      border-radius:14px;
+      font-size:20px;
+      line-height:1.8;
     }
 
   </style>
 </head>
+
 <body>
 
 <div class="container">
 
   <h1>Vì sao 1/n tiến gần về số 0?</h1>
 
-  <p>
-    Khi mẫu số càng lớn thì giá trị của phân số càng nhỏ.
-    Vì vậy nó sẽ tiến dần về phía số 0 thay vì số 1.
-  </p>
+  <div class="subtitle">
+    Khi mẫu số càng lớn, giá trị phân số càng nhỏ và tiến dần về số 0.
+  </div>
 
-  <!-- 1/2 -->
-  <div class="example">
-    <div class="fraction">1 / 2 = 0.5</div>
+  <div class="number-line-wrapper">
 
     <div class="line">
-      <div class="point" style="left:50%">1/2</div>
+      <div class="point" id="point">1/2</div>
     </div>
 
-    <div class="label">
+    <div class="labels">
       <span>0</span>
       <span>1</span>
     </div>
 
-    <div class="explain">
-      1/2 nằm đúng giữa số 0 và số 1.
-    </div>
   </div>
 
-  <!-- 1/3 -->
-  <div class="example">
-    <div class="fraction">1 / 3 ≈ 0.333</div>
+  <div class="info">
+    <div class="fraction" id="fractionText">1 / 2</div>
 
-    <div class="line">
-      <div class="point" style="left:33%">1/3</div>
-    </div>
-
-    <div class="label">
-      <span>0</span>
-      <span>1</span>
-    </div>
-
-    <div class="explain">
-      1/3 gần số 0 hơn. <br/>
-      Khoảng cách đến số 1 lớn gấp đôi khoảng cách đến số 0.
-    </div>
+    Giá trị = <span class="value" id="valueText">0.5</span>
   </div>
 
-  <!-- 1/10 -->
-  <div class="example">
-    <div class="fraction">1 / 10 = 0.1</div>
-
-    <div class="line">
-      <div class="point" style="left:10%">1/10</div>
-    </div>
-
-    <div class="label">
-      <span>0</span>
-      <span>1</span>
-    </div>
-
-    <div class="explain">
-      1/10 đã rất gần số 0.
-    </div>
+  <div class="controls">
+    <button onclick="movePoint(2)">1 / 2</button>
+    <button onclick="movePoint(3)">1 / 3</button>
+    <button onclick="movePoint(5)">1 / 5</button>
+    <button onclick="movePoint(10)">1 / 10</button>
+    <button onclick="movePoint(100)">1 / 100</button>
+    <button onclick="autoDemo()">Tự động chạy</button>
   </div>
 
-  <!-- 1/100 -->
-  <div class="example">
-    <div class="fraction">1 / 100 = 0.01</div>
-
-    <div class="line">
-      <div class="point" style="left:1%">1/100</div>
-    </div>
-
-    <div class="label">
-      <span>0</span>
-      <span>1</span>
-    </div>
-
-    <div class="explain">
-      Khi mẫu số tăng lên rất lớn, phân số gần như dính sát vào số 0.
-    </div>
-  </div>
-
-  <div class="big">
+  <div class="formula">
     1 / ∞ → 0
   </div>
 
-  <div class="arrow">↓</div>
+  <div class="desc">
+    Hãy nhìn chấm đỏ trên trục số.<br><br>
 
-  <p style="text-align:center; font-size:20px;">
-    Mẫu số càng lớn → giá trị càng nhỏ → tiến gần về số 0
-  </p>
+    Khi mẫu số tăng lên:
+    <br>
+    1/2 → 1/3 → 1/5 → 1/10 → 1/100
+    <br><br>
+
+    chấm đỏ sẽ chạy dần về phía số 0.
+    <br><br>
+
+    Điều đó cho thấy:
+    <strong>
+      chia 1 cho một số càng lớn thì kết quả càng nhỏ.
+    </strong>
+  </div>
 
 </div>
+
+<script>
+
+  const point = document.getElementById("point");
+  const fractionText = document.getElementById("fractionText");
+  const valueText = document.getElementById("valueText");
+
+  function movePoint(n){
+
+    let value = 1 / n;
+
+    point.style.left = (value * 100) + "%";
+
+    point.innerText = "1/" + n;
+
+    fractionText.innerText = "1 / " + n;
+
+    valueText.innerText = value.toFixed(6);
+  }
+
+  async function autoDemo(){
+
+    const numbers = [2,3,5,10,20,50,100];
+
+    for(let n of numbers){
+
+      movePoint(n);
+
+      await new Promise(resolve => setTimeout(resolve, 1400));
+    }
+  }
+
+  movePoint(2);
+
+</script>
 
 </body>
 </html>
